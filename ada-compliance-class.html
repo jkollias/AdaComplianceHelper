@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ada Compliance Helper</title>
+	<style>	
+		.js--ada-accordion-btn[aria-expanded="true"]{
+			outline: 2px solid #f00;
+		}
+
+		.js--ada-accordion-btn[aria-expanded="false"]{
+			outline: 2px solid #ff0;
+		}
+
+
+		.js--ada-accordion-item[aria-hidden="true"]{
+			display: none;
+		}
+		.js--ada-accordion-item[aria-hidden="false"]{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+
+	
+	<section class="ada-accordion">
+
+		<div class="ada-accordion--item">
+			<button class="js--ada-accordion-btn" aria-expanded="false" aria-controls="accordian-panel-1">1. Hello World</button>
+			<div class="ada-accordion--item-panel js--ada-accordion-item" aria-hidden="true" id="accordian-panel-1">
+				Nice To See You
+			</div>
+		</div>
+
+		<div class="ada-accordion--item">
+			<button class="js--ada-accordion-btn" aria-expanded="false">2. Hello World</button>
+			<div class="ada-accordion--item-panel js--ada-accordion-item" aria-hidden="true"  >
+				Nice To See You
+			</div>
+		</div> 
+
+		<div class="ada-accordion--item">
+			<button class="js--ada-accordion-btn">3. Hello World</button>
+			<div class="ada-accordion--item-panel js--ada-accordion-item">
+				Nice To See You
+			</div>
+		</div>
+
+	</section>
+
+	<script src="js/ada-accordion.js"></script> 
+
+    <script>
+       
+
+        new AdaAccordion(".ada-accordion");
+    </script>
+
+	
+	<script>
+		//accordians
+		//dropdowns
+		//menus
+		//popups
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ada Compliance Helper</title>
+	<style>	
+		.js--ada-accordion-btn[aria-expanded="true"]{
+			outline: 2px solid #f00;
+		}
+
+		.js--ada-accordion-btn[aria-expanded="false"]{
+			outline: 2px solid #ff0;
+		}
+
+
+		.js--ada-accordion-item[aria-hidden="true"]{
+			display: none;
+		}
+		.js--ada-accordion-item[aria-hidden="false"]{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+
+	
+	<section class="ada-accordion">
+
+		<div class="ada-accordion--item">
+			<button class="js--ada-accordion-btn" aria-expanded="false" aria-controls="accordian-panel-1">1. Hello World</button>
+			<div class="ada-accordion--item-panel js--ada-accordion-item" aria-hidden="true" id="accordian-panel-1">
+				Nice To See You
+			</div>
+		</div>
+
+		<div class="ada-accordion--item">
+			<button class="js--ada-accordion-btn" aria-expanded="false">2. Hello World</button>
+			<div class="ada-accordion--item-panel js--ada-accordion-item" aria-hidden="true"  >
+				Nice To See You
+			</div>
+		</div> 
+
+		<div class="ada-accordion--item">
+			<button class="js--ada-accordion-btn">3. Hello World</button>
+			<div class="ada-accordion--item-panel js--ada-accordion-item">
+				Nice To See You
+			</div>
+		</div>
+
+	</section>
+	
+	 
+	<script>
+		let accordionItems = document.querySelectorAll(".ada-accordion .ada-accordion--item");
+
+		//let accordionBtns = document.querySelectorAll(".ada-accordion .js--ada-accordion-btn");
+
+		function toggleTrueFalse(val){
+			return val == "true" ? val = "false" : val = "true";
+		}
+
+		function toggleAriaHidden(panel){
+			let val = panel.getAttribute("aria-hidden");
+			panel.setAttribute("aria-hidden",toggleTrueFalse(val));
+		}
+
+		function toggleAriaExpanded(btn){
+			let val = btn.getAttribute("aria-expanded");
+			btn.setAttribute("aria-expanded", toggleTrueFalse(val));
+			let panel = btn.nextElementSibling;
+			toggleAriaHidden(panel);
+		}
+
+		function checkAttributeAndAdd(el,att){ 
+			if(!el.hasAttribute(att)){
+			   el.setAttribute(att,"false");
+			}
+		}
+
+		function addAriaControlToButton(btn, i){
+			btn.setAttribute("aria-controls", "accordian-panel-"+i);
+		}
+
+		function addAriaIdToBtn(btn, i){
+			btn.setAttribute("id", "accordian-btn-"+i);
+		}
+
+		function addAriaIdToPanel(panel, i){
+			panel.setAttribute("id", "accordion-content-"+i);
+		}
+
+		function addAriaLableByToPanel(panel, i){
+			panel.setAttribute("aria-labelledby", "accordion-btn-"+i);
+		}
+
+		function addAriaAttributesToElements(item,index){
+			let panel = item.querySelector("button + *");
+			let btn = item.querySelector("button");
+			checkAttributeAndAdd(btn,"aria-expanded");
+			addAriaIdToBtn(btn, index);
+			//addAriaControl(btn, index);
+			addAriaControlToButton(btn, index);
+			addAriaIdToPanel(panel, index);
+			addEventToBtns(btn);
+		}
+
+		function addEventToBtns(btn){
+			btn.addEventListener("click", function(){
+				toggleAriaExpanded(btn);
+			})
+		}
+
+		function setupAriaItems(item,index){
+			addAriaAttributesToElements(item,index);
+			addEventToBtns(item.querySelector("button"));
+		}
+
+		// accordionItems.forEach(item,i => 
+		// 	//setupAriaItems(item)
+		// 	console.log(item, i)
+		// );
+
+		accordionItems.forEach( function(item, index){
+			setupAriaItems(item, index)
+		});
+
+
+		//accordians
+		//dropdowns
+		//menus
+		//popups
+
+		
+
+	</script>
+	
+</body>
+</html>
